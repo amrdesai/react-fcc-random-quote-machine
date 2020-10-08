@@ -24,7 +24,6 @@ class QuoteBox extends Component {
                 'https://type.fit/api/quotes'
             ).then((res) => res.json());
             this.setState({ allQuotes: fetchQuote });
-            console.log(this.state);
 
             this.displayQuote();
         })();
