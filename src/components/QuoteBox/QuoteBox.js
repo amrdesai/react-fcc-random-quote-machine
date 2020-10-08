@@ -7,25 +7,35 @@ import classes from './QuoteBox.module.scss';
 // style={{ border: '1px solid blue' }}
 
 // API
-// https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?
+// https://type.fit/api/quotes
 
 class QuoteBox extends Component {
     state = {
+        allQuotes: [],
         quote: '',
         author: '',
     };
 
     // Load quote on page load
     componentDidMount() {
-        this.getQuote();
+        // Async get quote function
+        (async () => {
+            const fetchQuote = await fetch(
+                'https://type.fit/api/quotes'
+            ).then((res) => res.json());
+            this.setState({ allQuotes: fetchQuote });
+            console.log(this.state);
+
+            this.displayQuote();
+        })();
     }
 
-    // Async get quote function
-    getQuote = async () => {
-        const fetchQuote = await fetch(
-            'http://quotes.stormconsultancy.co.uk/random.json'
-        ).then((res) => res.json());
-        this.setState({ quote: fetchQuote.quote, author: fetchQuote.author });
+    displayQuote = () => {
+        const randomNum = Math.floor(Math.random() * Math.floor(1643));
+        const randomQuote = this.state.allQuotes[randomNum];
+
+        // setting quote on dispaly
+        this.setState({ quote: randomQuote.text, author: randomQuote.author });
     };
 
     render() {
@@ -60,7 +70,7 @@ class QuoteBox extends Component {
                     </div>
                     <div className="col-4">
                         <button
-                            onClick={this.getQuote}
+                            onClick={this.displayQuote}
                             className="btn btn-lg btn-info"
                             id="new-quote"
                         >
