@@ -1,4 +1,4 @@
-# Free Code Camp: Front End Libraries - Random Quote Machine (React Project)
+## Free Code Camp: Front End Libraries - Random Quote Machine (React Project)
 [# Live View](https://minm333.github.io/fcc-random-quote-machine/)
 
 
